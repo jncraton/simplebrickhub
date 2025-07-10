@@ -61,10 +61,11 @@ def try_motor_mode():
                 motor.stop()
                 while hub.buttons.pressed(): pass
             else:
-                speed = 30
+                speed = 50
                 while hub.buttons.pressed():
-                    motor.speed(speed)
-                    speed += 1
+                    motor.run(speed)
+                    speed += 13
+                    wait(50)
 
 def try_lights_mode():
     try:
