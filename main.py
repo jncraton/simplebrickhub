@@ -100,6 +100,9 @@ def try_lights_mode():
     except OSError:
         lightB = None
 
+    if not (lightA or lightB):
+        return # No lights
+
     a_on = True
     if not lightA:
         a_on = False
@@ -115,6 +118,11 @@ def try_lights_mode():
             a_on = not a_on
             while hub.buttons.pressed(): pass
 
-try_train_mode()
-try_motor_mode()
-try_lights_mode()
+while True:
+    try:
+        try_train_mode()
+        try_motor_mode()
+        try_lights_mode()
+    except OSError:
+        wait(200)
+        pass # No valid modes, keep trying
