@@ -5,6 +5,8 @@ from pybricks.robotics import DriveBase
 from pybricks.tools import wait, StopWatch
 from umath import sin, pi
 
+button_repeat_delay = 200
+
 hub = CityHub()
 
 # Disable the stop button.
@@ -13,21 +15,44 @@ hub.system.set_stop_button(None)
 # Animate hub light
 hub.light.animate([Color.WHITE * (0.5 * sin(i / 15 * pi) + 0.5) for i in range(30)], 40)
 
-lightA = Light(Port.A)
-lightB = Light(Port.B)
+def try_train_mode():
+    # Initialize the motor.
+    try:
+        train_motor = DCMotor(Port.A)
+    except OSError:
+        return # Not train mode
 
-lightA.on(100)
-lightB.on(100)
+    toggle = False
 
-a_on = True
+    while True:
+        if hub.buttons.pressed():
+            toggle = not toggle
+            if toggle:
+                train_motor.dc(40)
+            else:
+                train_motor.stop()
+            wait(button_repeat_delay)
 
-while True:
-    if hub.buttons.pressed():
-        if a_on:
-            lightA.off()
-            lightB.on(100)
-        else:
-            lightA.on(100)
-            lightB.off()
-        a_on = not a_on
-        wait(200)
+def try_lights_mode():
+    lightA = Light(Port.A)
+    lightB = Light(Port.B)
+
+
+    lightA.on(100)
+    lightB.on(100)
+
+    a_on = True
+
+    while True:
+        if hub.buttons.pressed():
+            if a_on:
+                lightA.off()
+                lightB.on(100)
+            else:
+                lightA.on(100)
+                lightB.off()
+            a_on = not a_on
+            wait(button_repeat_delay)
+
+try_train_mode()
+try_lights_mode()
