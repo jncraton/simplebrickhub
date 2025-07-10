@@ -39,23 +39,28 @@ def try_train_mode():
             while hub.buttons.pressed(): pass
 
 def try_lights_mode():
-    lightA = Light(Port.A)
-    lightB = Light(Port.B)
+    try:
+        lightA = Light(Port.A)
+        lightA.on(100)
+    except OSError:
+        lightA = None
 
-
-    lightA.on(100)
-    lightB.on(100)
+    try:
+        lightB = Light(Port.B)
+        lightB.on(100)
+    except OSError:
+        lightB = None
 
     a_on = True
 
     while True:
         if hub.buttons.pressed():
             if a_on:
-                lightA.off()
-                lightB.on(100)
+                if lightA: lightA.off()
+                if lightB: lightB.on(100)
             else:
-                lightA.on(100)
-                lightB.off()
+                if lightA: lightA.on(100)
+                if lightB: lightB.off()
             a_on = not a_on
             while hub.buttons.pressed(): pass
 
