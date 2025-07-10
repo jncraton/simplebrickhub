@@ -13,3 +13,7 @@ Firmware for LEGO smart hubs to convert them into simple battery boxes.
 | 🚦 Lights     | 💡 Lights        | 💡 Lights (optional) | Toggle between A and B
 | 🚂 Train      | 🚂 Linear Motor  | 💡 Lights (optional) | Toggle motor (0%/40%)
 | 🏗  Motor      | 🏗  Technic Motor | 💡 Lights (optional) | Toggle motor speed/direction
+
+## Auto Shut-off
+
+The hub will shut itself off after 30 minutes of inactivity to preserve battery life and prevent wear and tear.

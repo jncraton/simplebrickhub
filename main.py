@@ -13,6 +13,24 @@ hub.system.set_stop_button(None)
 # Animate hub light
 hub.light.animate([Color.WHITE * (0.5 * sin(i / 15 * pi) + 0.5) for i in range(30)], 40)
 
+inactivity_timeout = 30 * 60 # Shutdown timer in seconds
+time_to_live = inactivity_timeout
+
+def is_active():
+    global time_to_live
+
+    if hub.buttons.pressed():
+        time_to_live = inactivity_timeout
+
+    if time_to_live <= 0:
+        hub.system.shutdown()
+        return False
+
+    wait(10)
+    time_to_live -= .01
+
+    return True
+
 def try_train_mode():
     # Initialize the motor.
     try:
@@ -29,7 +47,7 @@ def try_train_mode():
 
     toggle = False
 
-    while True:
+    while is_active():
         if hub.buttons.pressed():
             toggle = not toggle
             if toggle:
@@ -55,7 +73,7 @@ def try_motor_mode():
     speed = 0
     direction = 1
 
-    while True:
+    while is_active():
         if hub.buttons.pressed():
             if speed != 0:
                 speed = 0
@@ -86,7 +104,7 @@ def try_lights_mode():
     if not lightA:
         a_on = False
 
-    while True:
+    while is_active():
         if hub.buttons.pressed():
             if a_on:
                 if lightA: lightA.off()
