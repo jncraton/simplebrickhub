@@ -1,5 +1,5 @@
 from pybricks.hubs import CityHub
-from pybricks.pupdevices import DCMotor, Light
+from pybricks.pupdevices import DCMotor, Motor, Light
 from pybricks.parameters import Button, Color, Direction, Port, Side, Stop
 from pybricks.robotics import DriveBase
 from pybricks.tools import wait, StopWatch
@@ -38,6 +38,34 @@ def try_train_mode():
                 train_motor.stop()
             while hub.buttons.pressed(): pass
 
+def try_motor_mode():
+    # Initialize the motor
+    try:
+        motor = Motor(Port.A)
+    except OSError:
+        return # Not motor mode
+
+    # Turn on light if present
+    try:
+        light = Light(Port.B)
+        light.on(100)
+    except OSError:
+        pass # Light not present
+
+    speed = 0
+
+    while True:
+        if hub.buttons.pressed():
+            if speed != 0:
+                speed = 0
+                motor.stop()
+                while hub.buttons.pressed(): pass
+            else:
+                speed = 30
+                while hub.buttons.pressed():
+                    motor.speed(speed)
+                    speed += 1
+
 def try_lights_mode():
     try:
         lightA = Light(Port.A)
@@ -67,4 +95,5 @@ def try_lights_mode():
             while hub.buttons.pressed(): pass
 
 try_train_mode()
+try_motor_mode()
 try_lights_mode()
