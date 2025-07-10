@@ -9,5 +9,5 @@ Firmware for LEGO smart hubs to convert them into simple battery boxes.
 
 | Mode         | Port A         | Port B            | Button Press Function
 | ------------ | -------------- | ----------------- | ----------------------
-| Lights       | Lights         | Lights (optional) | Toggle between A and B
-| Train        | Linear Motor   | Lights (optional) | Toggle motor (0%/40%)
+| 🚦Lights     | Lights         | Lights (optional) | Toggle between A and B
+| 🚂Train      | Linear Motor   | Lights (optional) | Toggle motor (0%/40%)
