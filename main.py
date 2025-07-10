@@ -52,6 +52,8 @@ def try_lights_mode():
         lightB = None
 
     a_on = True
+    if not lightA:
+        a_on = False
 
     while True:
         if hub.buttons.pressed():
