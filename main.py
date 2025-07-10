@@ -11,7 +11,7 @@ hub = CityHub()
 hub.system.set_stop_button(None)
 
 # Animate hub light
-hub.light.animate([Color.WHITE * (0.5 * sin(i / 15 * pi) + 0.5) for i in range(30)], 40)
+hub.light.animate([Color.WHITE * 0.1 * (0.5 * sin(i / 15 * pi) + 0.5) for i in range(30)], 40)
 
 inactivity_timeout = 30 * 60 # Shutdown timer in seconds
 time_to_live = inactivity_timeout
