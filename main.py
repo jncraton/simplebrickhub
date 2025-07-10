@@ -20,6 +20,13 @@ def try_train_mode():
     except OSError:
         return # Not train mode
 
+    # Turn on light if present
+    try:
+        light = Light(Port.B)
+        light.on(100)
+    except OSError:
+        pass # Light no present
+
     toggle = False
 
     while True:
