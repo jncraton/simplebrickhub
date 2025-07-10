@@ -53,18 +53,20 @@ def try_motor_mode():
         pass # Light not present
 
     speed = 0
+    direction = 1
 
     while True:
         if hub.buttons.pressed():
             if speed != 0:
                 speed = 0
                 motor.stop()
+                direction = direction * -1
                 while hub.buttons.pressed(): pass
             else:
                 speed = 50
                 while hub.buttons.pressed():
-                    motor.run(speed)
-                    speed += 13
+                    motor.run(speed * direction)
+                    speed += 50
                     wait(50)
 
 def try_lights_mode():
