@@ -19,7 +19,7 @@ time_to_live = inactivity_timeout
 
 
 def is_active():
-    """Returns True if device should not halt due to inactivity
+    """Returns True if hub remains active
 
     This function will shutdown the hub if the global time_to_live
     has reached zero.
