@@ -39,6 +39,11 @@ def is_active():
     return True
 
 def try_train_mode():
+    """ Attempts to run the train mode interface
+
+    :return: None if no train motor present
+    """
+
     # Initialize the motor.
     try:
         train_motor = DCMotor(Port.A)
@@ -64,6 +69,11 @@ def try_train_mode():
             while hub.buttons.pressed(): pass
 
 def try_motor_mode():
+    """ Attempts to run the motor mode interface
+
+    :return: None if an appropriate motor is not present
+    """
+    
     # Initialize the motor
     try:
         motor = Motor(Port.A)
@@ -95,6 +105,11 @@ def try_motor_mode():
                     wait(50)
 
 def try_lights_mode():
+    """ Attempts the run the lights interface
+
+    :return: None if no lights are present
+    """
+
     try:
         lightA = Light(Port.A)
         lightA.on(100)
