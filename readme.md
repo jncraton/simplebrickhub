@@ -2,6 +2,8 @@
 
 Firmware for LEGO smart hubs to convert them into simple battery boxes.
 
+<img width="480" height="360" alt="image" src="https://github.com/user-attachments/assets/b7effbde-a075-4a9a-b0f5-b163986172e7" />
+
 ## Overview
 
 There are [a number of hubs](https://rebrickable.com/parts/?get_drill_downs=&tag=&min_year=2015&max_year=2025&min_part_cost=0&max_part_cost=20&q=Powered%20up%20hub&part_cat=45&exists_in_color=) available for powering LEGO models using [Powered Up motors](https://rebrickable.com/parts/?get_drill_downs=&tag=&min_year=2015&max_year=2025&min_part_cost=0&max_part_cost=20&q=Powered%20up%20motor&part_cat=45&exists_in_color=). Most of these are smart hubs that require a connection to a smart device either for direct control or for programming. There is [one non-Bluetooth hub](https://rebrickable.com/parts/85825/hub-powered-up-2-port-non-bluetooth-screw-opening/), but it may not make sense to purchase this separately if you already have a smart hub from something like a train set.
