@@ -16,6 +16,14 @@ inactivity_timeout = 30 * 60 # Shutdown timer in seconds
 time_to_live = inactivity_timeout
 
 def is_active():
+    """ Returns True if device should not halt due to inactivity
+
+    This function will shutdown the hub if the global time_to_live
+    has reached zero.
+
+    :return: True if device is still active, False otherwise
+    """
+    
     global time_to_live
 
     if hub.buttons.pressed():
