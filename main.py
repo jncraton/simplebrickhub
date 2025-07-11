@@ -10,20 +10,23 @@ hub = CityHub()
 hub.system.set_stop_button(None)
 
 # Animate hub light
-hub.light.animate([Color.WHITE * 0.1 * (0.5 * sin(i / 15 * pi) + 0.5) for i in range(30)], 40)
+hub.light.animate(
+    [Color.WHITE * 0.1 * (0.5 * sin(i / 15 * pi) + 0.5) for i in range(30)], 40
+)
 
-inactivity_timeout = 30 * 60 # Shutdown timer in seconds
+inactivity_timeout = 30 * 60  # Shutdown timer in seconds
 time_to_live = inactivity_timeout
 
+
 def is_active():
-    """ Returns True if device should not halt due to inactivity
+    """Returns True if device should not halt due to inactivity
 
     This function will shutdown the hub if the global time_to_live
     has reached zero.
 
     :return: True if device is still active, False otherwise
     """
-    
+
     global time_to_live
 
     if hub.buttons.pressed():
@@ -34,12 +37,13 @@ def is_active():
         return False
 
     wait(10)
-    time_to_live -= .01
+    time_to_live -= 0.01
 
     return True
 
+
 def try_train_mode():
-    """ Attempts to run the train mode interface
+    """Attempts to run the train mode interface
 
     :return: None if no train motor present
     """
@@ -48,14 +52,14 @@ def try_train_mode():
     try:
         train_motor = DCMotor(Port.A)
     except OSError:
-        return # Not train mode
+        return  # Not train mode
 
     # Turn on light if present
     try:
         light = Light(Port.B)
         light.on(100)
     except OSError:
-        pass # Light no present
+        pass  # Light no present
 
     toggle = False
 
@@ -66,26 +70,28 @@ def try_train_mode():
                 train_motor.dc(40)
             else:
                 train_motor.stop()
-            while hub.buttons.pressed(): pass
+            while hub.buttons.pressed():
+                pass
+
 
 def try_motor_mode():
-    """ Attempts to run the motor mode interface
+    """Attempts to run the motor mode interface
 
     :return: None if an appropriate motor is not present
     """
-    
+
     # Initialize the motor
     try:
         motor = Motor(Port.A)
     except OSError:
-        return # Not motor mode
+        return  # Not motor mode
 
     # Turn on light if present
     try:
         light = Light(Port.B)
         light.on(100)
     except OSError:
-        pass # Light not present
+        pass  # Light not present
 
     speed = 0
     direction = 1
@@ -96,7 +102,8 @@ def try_motor_mode():
                 speed = 0
                 motor.stop()
                 direction = direction * -1
-                while hub.buttons.pressed(): pass
+                while hub.buttons.pressed():
+                    pass
             else:
                 speed = 50
                 while hub.buttons.pressed():
@@ -104,8 +111,9 @@ def try_motor_mode():
                     speed += 50
                     wait(50)
 
+
 def try_lights_mode():
-    """ Attempts the run the lights interface
+    """Attempts the run the lights interface
 
     :return: None if no lights are present
     """
@@ -123,7 +131,7 @@ def try_lights_mode():
         lightB = None
 
     if not (lightA or lightB):
-        return # No lights
+        return  # No lights
 
     a_on = True
     if not lightA:
@@ -132,13 +140,19 @@ def try_lights_mode():
     while is_active():
         if hub.buttons.pressed():
             if a_on:
-                if lightA: lightA.off()
-                if lightB: lightB.on(100)
+                if lightA:
+                    lightA.off()
+                if lightB:
+                    lightB.on(100)
             else:
-                if lightA: lightA.on(100)
-                if lightB: lightB.off()
+                if lightA:
+                    lightA.on(100)
+                if lightB:
+                    lightB.off()
             a_on = not a_on
-            while hub.buttons.pressed(): pass
+            while hub.buttons.pressed():
+                pass
+
 
 while True:
     try:
@@ -147,4 +161,4 @@ while True:
         try_lights_mode()
     except OSError:
         wait(200)
-        pass # No valid modes, keep trying
+        pass  # No valid modes, keep trying
