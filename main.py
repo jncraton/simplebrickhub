@@ -1,8 +1,7 @@
 from pybricks.hubs import CityHub
 from pybricks.pupdevices import DCMotor, Motor, Light
-from pybricks.parameters import Button, Color, Direction, Port, Side, Stop
-from pybricks.robotics import DriveBase
-from pybricks.tools import wait, StopWatch
+from pybricks.parameters import Color, Port
+from pybricks.tools import wait
 from umath import sin, pi
 
 hub = CityHub()
